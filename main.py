@@ -9,7 +9,7 @@ def main(args):
     source = args.get('source')
     destiny = args.get('destiny')
     if source and destiny:
-        p = Preprocess(source, destiny)
+        p = Preprocess.Preprocess(source, destiny)
         p.equalizeHistory()
     else:
         print('Check the parameters....')
@@ -17,7 +17,7 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser("Preprocess utility.....\n")
     defaultSource = os.getcwd()
-    defaultDestiny = os.path.join(defaultSource, 'Results {0}'.format(str(datetime.datetime.now())))
+    defaultDestiny = os.path.join(defaultSource, 'Results {0}'.format(str(datetime.datetime.now().day)))
     parser.add_argument('-source', type=str, help='Source folder', default=defaultSource)
     parser.add_argument('-destiny', type=str, help='Destiny folder', default=defaultDestiny)
     args = vars(parser.parse_args())
