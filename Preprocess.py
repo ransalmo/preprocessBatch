@@ -25,6 +25,19 @@ class Preprocess(object):
             newFile = os.path.join(finalDestinyPath, os.path.basename(imagePath))
             cv2.imwrite(newFile, equ)
 
+    def claheEqualization(self):
+        files = self.__getImageFiles(self.sourcePath)
+        finalDestinyPath = self.destinyPath
+        if not os.path.exists(self.destinyPath):
+            finalDestinyPath = self.destinyPath + str(uuid.uuid4().hex) + '_equalized'
+            os.makedirs(finalDestinyPath)
+        clahe = cv2.createCLAHE(clipLimit=2.0, tileGridSize=(8, 8))
+        for imagePath in files:
+            img = cv2.imread(imagePath, cv2.IMREAD_GRAYSCALE)
+            cla = clahe.apply(img)
+            newFile = os.path.join(finalDestinyPath, os.path.basename(imagePath))
+            cv2.imwrite(newFile, cla)
+
     def setDestinyPath(self, path):
         self.destinyPath = path
 
