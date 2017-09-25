@@ -10,7 +10,11 @@ def main(args):
     destiny = args.get('destiny')
     if source and destiny:
         p = Preprocess.Preprocess(source, destiny)
+        #I'm calling all the algotims to test
         p.equalizeHistory()
+        p.adaptiveThreshold()
+        p.claheEqualization()
+        p.claheColor()
     else:
         print('Check the parameters....')
 
