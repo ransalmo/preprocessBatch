@@ -50,7 +50,8 @@ class Preprocess(object):
     def claheColor(self):
        path, files = self.__setupExceution('clahe_col')
        clahe = cv2.createCLAHE(clipLimit=3.0, tileGridSize=(8, 8))
-       for imagePath in files:
+       for index, imagePath in enumerate(files):
+            print('Processing {0} from {1}'.format(index, len(files)))
             img = cv2.imread(imagePath, 1)
             labImg = cv2.cvtColor(img, cv2.COLOR_BGR2LAB)
             l, a, b = cv2.split(labImg)
@@ -60,6 +61,7 @@ class Preprocess(object):
             finalRGB = cv2.cvtColor(merged, cv2.COLOR_LAB2BGR)
             #write file
             newFile = os.path.join(path, os.path.basename(imagePath))
+            cv2.imwrite(newFile, finalRGB)
 
 
     def setDestinyPath(self, path):
